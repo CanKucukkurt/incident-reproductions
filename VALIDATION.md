@@ -35,3 +35,8 @@ arm64; Linux checks are configured in `.github/workflows/checks.yml`.
 
 Original prompt whitespace, CSV line endings, and benchmark patches are preserved;
 Git whitespace warnings on those imported assets are expected.
+
+Fresh-clone review found an overly broad ignore rule that excluded three synthetic
+compaction CSV inputs. The rule now targets only the downloaded shared-runtime
+data directory. Release verification also requires every selected provenance path
+to appear in the checksum inventory.

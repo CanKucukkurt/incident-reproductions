@@ -10,7 +10,7 @@ models.yaml
 runs/
 artifacts/
 judgments/
-data/
+/shared/ai-collusion/data/
 .DS_Store
 build/
 dist/

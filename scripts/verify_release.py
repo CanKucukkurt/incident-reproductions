@@ -10,6 +10,12 @@ ROOT = Path(__file__).resolve().parents[1]
 def main():
     records = json.loads((ROOT / 'SHA256SUMS.json').read_text())
     errors = []
+    provenance = json.loads((ROOT / 'PROVENANCE.json').read_text())
+    required = [row['path'] for key in ('files', 'supplemental_aggregates')
+                for row in provenance.get(key, [])]
+    for name in required:
+        if name not in records:
+            errors.append(f'Source inventory missing from release: {name}')
     for name, expected in records.items():
         relative = Path(name)
         path = ROOT / relative
