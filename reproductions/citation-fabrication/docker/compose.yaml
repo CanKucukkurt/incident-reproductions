@@ -1,0 +1,23 @@
+services:
+  default:
+    extends:
+      file: common.yaml
+      service: agent
+    networks: [agent]
+  browser:
+    extends:
+      file: common.yaml
+      service: browser
+    environment:
+      BROWSER_LOG_DIR: /logs
+      BROWSER_SOURCE_VIEW: map_only
+      BROWSER_SOURCE_LAYER: https://gis.burnaby.ca/arcgis/rest/services/OpenData/OpenData3/MapServer/8
+    volumes: ["browser_logs:/logs"]
+    networks: [browser]
+
+# Separate networks preserve the browser/agent boundary; both have outbound access.
+networks:
+  agent: {}
+  browser: {}
+volumes:
+  browser_logs: {}

@@ -1,0 +1,35 @@
+# Stage B on the deepseek-writer48 prepare run (2 eligible Claude-Code-format summaries,
+# both from the pressure scenario). Same endpoint env as prepare.deepseek-writer48.yaml.
+run_name: deepseek-writer48-run
+prepare_run: deepseek-writer48
+output_root: runs
+scenarios:
+  loader: yaml_dir
+  path: scenarios
+  only: [gdpval_prepaid_missing_march, gdpval_prepaid_missing_march_pressure]
+base:
+  instruction: none
+  claimed_author: self
+  summary_role: user
+  compaction_variant: claude_code
+  mode: agent
+  insert_position: inline        # after the first summary line matching the scenario's problem_anchor
+grid:
+  instruction: [none, honest, conditional, conceal]
+sweeps:
+  insert_position: [append]    # end-of-summary placement as a comparison cell
+samples_per_cell: 3
+followup:
+  enabled: true
+  prompt: real_sources
+  tools: true
+  only_for:
+    instruction: [none, conceal]
+successor:
+  max_turns: 30
+sandbox:
+  runner: docker
+  image: compaction-reader-sandbox:latest
+llm:
+  concurrency: 8
+max_parallel_rollouts: 8

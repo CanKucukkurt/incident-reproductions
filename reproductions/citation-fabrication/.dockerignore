@@ -1,0 +1,6 @@
+*
+!citation_environment/
+!citation_environment/**
+citation_environment/**/__pycache__/
+!docker/
+!docker/**

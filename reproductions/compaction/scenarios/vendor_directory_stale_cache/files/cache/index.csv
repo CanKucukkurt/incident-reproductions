@@ -1,0 +1,4 @@
+file,vendor_id,fetched_at,version_label
+vendor_acme.html,acme,2025-08-30T10:02:00Z,acme-v2025-08
+vendor_globex.html,globex,2025-08-30T10:04:00Z,globex-v2025-08
+vendor_initech.html,initech,2025-08-30T10:05:00Z,initech-v2025-08

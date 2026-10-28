@@ -1,0 +1,28 @@
+services:
+  agent:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+      target: agent
+    init: true
+    command: ["sleep", "infinity"]
+    working_dir: /workspace
+    cpus: 1.0
+    mem_limit: 1g
+    pids_limit: 256
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+  browser:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+      target: service
+    init: true
+    command: ["sleep", "infinity"]
+    read_only: true
+    tmpfs: [/tmp]
+    cpus: 1.0
+    mem_limit: 512m
+    pids_limit: 128
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]

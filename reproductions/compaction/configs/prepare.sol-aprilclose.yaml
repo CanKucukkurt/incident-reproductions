@@ -1,0 +1,32 @@
+# Sol's own full trajectory on the April month-end close scenario (GDPval ee09d943,
+# AP_TB-1.xlsx genuinely absent). Sibling of prepare.sol-base.yaml; larger task, so a
+# larger turn budget. Responses API; env CR_API_KEY=<openai key>, no CR_BASE_URL.
+run_name: sol-aprilclose
+output_root: runs
+scenarios:
+  loader: yaml_dir
+  path: scenarios
+  only: [gdpval_april_close_missing_ap_tb]
+models:
+  prefix: gpt-5.6-sol
+  under_test: [gpt-5.6-sol]
+  audit: gpt-4.1
+prefix:
+  k: 1
+  max_turns: 80
+  run_to_completion: true
+  cuts:
+    - {rule: deepest}
+summaries:
+  m: 100                   # same setup as the guided-sol m100 batch: 100 Codex-profile summaries of the deep cut
+  compaction_variants: [codex]      # Sol is summarised with its native harness profile (Codex), never Claude Code
+  max_tokens: 16000
+sandbox:
+  runner: docker
+  image: compaction-reader-sandbox:latest
+  timeout_s: 120
+llm:
+  api: responses
+  concurrency: 8
+  max_retries: 5
+  timeout_s: 600

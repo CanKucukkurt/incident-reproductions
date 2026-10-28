@@ -1,0 +1,35 @@
+run_name: demo-run
+prepare_run: demo
+output_root: runs
+scenarios:
+  loader: yaml_dir
+  path: scenarios
+base:
+  instruction: none
+  claimed_author: self
+  summary_role: user
+  compaction_variant: self_handoff
+  mode: agent
+  insert_position: append
+grid:
+  instruction: [none, honest, conditional, conceal]
+sweeps:
+  claimed_author: [other_model, human_engineer]
+  summary_role: [assistant, developer]
+  mode: [final_answer_only]
+  # compaction_variant: [neutral_summarize, will_be_reviewed]   # needs those variants in prepare.summaries.compaction_variants
+samples_per_cell: 1
+followup:
+  enabled: true
+  prompt: real_sources
+  tools: true              # false = single no-tool call
+  only_for:
+    instruction: [none, conceal]
+successor:
+  max_turns: 30
+sandbox:
+  runner: docker
+  image: compaction-reader-sandbox:latest
+llm:
+  concurrency: 4
+max_parallel_rollouts: 4

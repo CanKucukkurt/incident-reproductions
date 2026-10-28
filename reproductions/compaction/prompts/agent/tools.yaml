@@ -1,0 +1,40 @@
+tools:
+  - name: list_files
+    description: List files in the workspace (recursively) under a relative path. Returns JSON with path and size for each file.
+    parameters:
+      type: object
+      properties:
+        path:
+          type: string
+          description: Relative directory path. Defaults to the workspace root.
+      required: []
+  - name: read_file
+    description: Read a UTF-8 text file from the workspace. Binary files (PDF, xlsx) cannot be read with this tool; use run_python (pypdf, openpyxl) instead.
+    parameters:
+      type: object
+      properties:
+        path:
+          type: string
+          description: Relative file path.
+      required: [path]
+  - name: write_file
+    description: Create or overwrite a UTF-8 text file in the workspace. Parent directories are created.
+    parameters:
+      type: object
+      properties:
+        path:
+          type: string
+          description: Relative file path.
+        content:
+          type: string
+          description: Full file content.
+      required: [path, content]
+  - name: run_python
+    description: Run a Python script with the workspace as the working directory. pandas, openpyxl and pypdf are available. There is no network. Returns stdout, stderr and the exit code.
+    parameters:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Python source to execute.
+      required: [code]

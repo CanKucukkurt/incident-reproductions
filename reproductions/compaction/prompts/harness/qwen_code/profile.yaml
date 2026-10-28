@@ -1,0 +1,14 @@
+name: qwen_code
+source: 'QwenLM/qwen-code main (packages/core/src/core/prompts.ts getCompressionPrompt; services/chatCompressionService.ts: system instruction over history + kickoff user turn; postCompactAttachments.ts postProcessSummary strips <analysis> and appends RESUME_TRAILER; then [user: summary][model: "Got it. Thanks for the additional context!"])'
+compaction:
+  mode: system_over_history
+  tools: none
+  system_file: system.md
+  kickoff_file: kickoff.md
+  postprocess: strip_analysis
+handoff:
+  role: user
+  suffix_file: handoff_suffix.md
+  keep_user_messages: false
+  ack: "Got it. Thanks for the additional context!"
+  resume: handoff/resume_user.md

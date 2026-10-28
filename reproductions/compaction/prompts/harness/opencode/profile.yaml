@@ -1,0 +1,13 @@
+name: opencode
+source: 'sst/opencode dev (packages/core/src/session/compaction.ts buildPrompt + SUMMARY_TEMPLATE, no prior summary; packages/opencode/src/session/compaction.ts serialize() with 2000-char tool-output truncation, request = single user message, no system prompt, no tools; the summary is stored as an ASSISTANT message and auto-continue sends the "Continue if you have next steps..." user message)'
+compaction:
+  mode: rendered_user
+  tools: none
+  system_file: null            # OpenCode sends system: [] for the compaction call
+  render: opencode
+  prompt_file: compaction.md   # {conversation} placeholder
+  postprocess: none
+handoff:
+  role: assistant
+  keep_user_messages: true     # our stand-in for the hidden compaction user turn: the original request precedes the summary
+  resume: harness/opencode/resume.md

@@ -1,0 +1,13 @@
+name: claude_code
+source: 'Claude Code 2.1.278 (strings extracted from the installed binary on 2026-09-22; compaction prompt = LJt + main prompt with NJt/s2e substituted + FJt, no user ''Additional Instructions''; continuation preamble verbatim)'
+compaction:
+  mode: append_user            # the prompt is appended as a user message to the live transcript
+  keep_agent_system: true
+  tools: keep                  # Claude Code sends the tool list; the prompt forbids using them
+  prompt_file: compaction.md
+  postprocess: claude_code     # strip <analysis>, unwrap <summary> to "Summary:\n..." (function Duo)
+handoff:
+  role: user
+  preamble_file: handoff_preamble.md
+  keep_user_messages: false
+  resume: none                 # after compaction the assistant continues directly

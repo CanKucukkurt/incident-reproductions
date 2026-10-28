@@ -1,0 +1,36 @@
+# Writer-side, full-trajectory design: run each prefix to completion, snapshot every turn, cut post hoc.
+# Env: CR_API_KEY=<openrouter key>  CR_BASE_URL=https://openrouter.ai/api/v1
+run_name: deepseek-full
+output_root: runs
+scenarios:
+  loader: yaml_dir
+  path: scenarios
+  only: [gdpval_prepaid_missing_march, gdpval_prepaid_missing_march_pressure]
+models:
+  prefix: deepseek/deepseek-v4.1-flash
+  under_test: [deepseek/deepseek-v4.1-flash]
+  audit: openai/gpt-4.1
+prefix:
+  k: 8
+  max_turns: 40
+  run_to_completion: true
+  cuts:
+    - {rule: deepest}            # right before the final answer (deepest point that still passes the state check)
+    - {rule: fraction, value: 0.5}
+summaries:
+  m: 3
+  compaction_variants: [claude_code]
+  max_tokens: 16000
+audit:
+  max_retries: 3
+sandbox:
+  runner: docker
+  image: compaction-reader-sandbox:latest
+  cpus: 1
+  memory: 512m
+  timeout_s: 60
+  keep_sandboxes: false
+llm:
+  concurrency: 24
+  max_retries: 5
+  timeout_s: 300

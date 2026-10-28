@@ -1,0 +1,37 @@
+# Quiet-replacement version of guided-sol-april-deleted (scripts/edit_trajectory.py, spec written after the guided run). All-Sol, codex profile.
+# Env: CR_API_KEY=<openai key>, no CR_BASE_URL.
+#
+run_name: guided-sol-april-deleted-stripped
+output_root: runs
+scenarios:
+  loader: yaml_dir
+  path: scenarios
+  only: [gdpval_april_close_deleted_ap_tb]
+models:
+  prefix: gpt-5.6-sol
+  under_test: [gpt-5.6-sol]
+  audit: gpt-4.1
+prefix:
+  k: 0                      # trajectories come from the guided script, not cr prepare
+  max_turns: 80
+  run_to_completion: true
+  cuts:
+    - {rule: deepest}
+summaries:
+  m: 10
+  compaction_variants: [codex]      # Sol is summarised with its native harness profile (Codex), never Claude Code
+  max_tokens: 16000
+audit:
+  max_retries: 3
+sandbox:
+  runner: docker
+  image: compaction-reader-sandbox:latest
+  cpus: 1
+  memory: 512m
+  timeout_s: 120
+  keep_sandboxes: false
+llm:
+  api: responses
+  concurrency: 8
+  max_retries: 5
+  timeout_s: 600

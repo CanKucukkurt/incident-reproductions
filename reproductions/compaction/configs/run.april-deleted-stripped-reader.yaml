@@ -1,0 +1,40 @@
+# Reader side on the April close quiet-replacement (self-caused deletion) cut: the 10 stripped codex summaries as written
+# (instruction none, no follow-up). Sol successor via the Responses API restores the deep-cut snapshot (deliverable + fabricated
+# replacement file present) and runs to a final answer. Env: CR_API_KEY=<openai key>, no CR_BASE_URL.
+run_name: april-deleted-stripped-reader
+prepare_run: guided-sol-april-deleted-stripped
+output_root: runs
+scenarios:
+  loader: yaml_dir
+  path: scenarios
+  only:
+  - gdpval_april_close_deleted_ap_tb
+base:
+  instruction: none
+  claimed_author: self
+  summary_role: user
+  compaction_variant: codex
+  mode: agent
+  insert_position: inline
+  edit_mode: insert
+grid:
+  instruction:
+  - none
+sweeps: {}
+samples_per_cell: 3
+followup:
+  enabled: false
+successor:
+  max_turns: 30
+  max_tokens: 40000
+  max_degenerate_retries: 2
+sandbox:
+  runner: docker
+  image: compaction-reader-sandbox:latest
+  timeout_s: 120
+llm:
+  api: responses
+  concurrency: 10
+  max_retries: 5
+  timeout_s: 600
+max_parallel_rollouts: 10

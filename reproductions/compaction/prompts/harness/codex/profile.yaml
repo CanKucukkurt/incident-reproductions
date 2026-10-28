@@ -1,0 +1,16 @@
+name: codex
+source: 'openai/codex main (codex-rs/prompts/templates/compact/prompt.md + summary_prefix.md; core/src/compact.rs keeps the user messages and appends SUMMARY_PREFIX + "\n" + summary as a user message)'
+compaction:
+  mode: append_user
+  keep_agent_system: true
+  tools: none
+  prompt_file: compaction.md
+  postprocess: none
+  # system.md = Codex's real base instructions for gpt-5.6-sol, copied verbatim from a Codex CLI 0.154.0
+  # session rollout (session_meta.base_instructions, provenance model=gpt-5.6-sol, 2026-09-24). Not yet wired
+  # in: the agent system prompt is still prompts/agent/system.md (keep_agent_system: true).
+handoff:
+  role: user
+  preamble_file: handoff_preamble.md
+  keep_user_messages: true     # original user messages precede the summary message
+  resume: none

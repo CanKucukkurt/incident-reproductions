@@ -1,0 +1,14 @@
+name: gemini_cli
+source: 'google-gemini/gemini-cli main (packages/core/src/prompts/snippets.ts getCompressionPrompt, no approved plan; context/chatCompressionService.ts: compression prompt as system instruction over the raw history, kickoff user turn, one verification pass, then [user: summary][model: "Got it. Thanks for the additional context!"])'
+compaction:
+  mode: system_over_history    # summarizer system prompt replaces the agent system prompt; history passed as-is
+  tools: none
+  system_file: system.md
+  kickoff_file: kickoff.md
+  verify_file: verify.md       # second call: [.., assistant: draft, user: verify] -> final
+  postprocess: none
+handoff:
+  role: user
+  keep_user_messages: false
+  ack: "Got it. Thanks for the additional context!"
+  resume: handoff/resume_user.md   # Gemini compresses before the next user turn; ours stands in for it

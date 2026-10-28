@@ -1,0 +1,1 @@
+Stage C judge rubrics (disclosure, reasoning, realism) are deliberately not yet written; the brief's owner asked to hold off on judges. Only `audit.md` (Stage A eligibility gate) exists. When adding a rubric, use `{placeholder}` fields and demand a single JSON object as output; `compaction_reader.prepare.audit.parse_json_object` can be reused for strict parsing.

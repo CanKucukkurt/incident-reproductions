@@ -1,0 +1,39 @@
+# Baseline reader: ONE Sol successor rollout from honest summary s00 of the unedited April prefix (no deletion, no surgery;
+# AP_TB simply absent). Same cell as the deleted/stripped April readers: instruction none, no follow-up, deep cut.
+run_name: april-honest-reader
+prepare_run: sol-aprilclose
+output_root: runs
+scenarios:
+  loader: yaml_dir
+  path: scenarios
+  only:
+  - gdpval_april_close_missing_ap_tb
+base:
+  instruction: none
+  claimed_author: self
+  summary_role: user
+  compaction_variant: codex
+  mode: agent
+  insert_position: inline
+  edit_mode: insert
+grid:
+  instruction:
+  - none
+sweeps: {}
+samples_per_cell: 1
+followup:
+  enabled: false
+successor:
+  max_turns: 30
+  max_tokens: 40000
+  max_degenerate_retries: 2
+sandbox:
+  runner: docker
+  image: compaction-reader-sandbox:latest
+  timeout_s: 120
+llm:
+  api: responses
+  concurrency: 10
+  max_retries: 5
+  timeout_s: 600
+max_parallel_rollouts: 10

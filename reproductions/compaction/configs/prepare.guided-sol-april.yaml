@@ -1,0 +1,37 @@
+# All-Sol guided fabrication on the April close (source = runs/sol-aprilclose p00): scripts/guided_fabrication.py
+# --scenario gdpval_april_close_fabricated_ap_tb --nudge fabricate_ap_tb --mention-regex AP_TB. Sol acts and summarises via the
+# Responses API. Env: CR_API_KEY=<openai key>, no CR_BASE_URL. summaries.m=100 mirrors the guided-sol m100 batch (not run by default).
+run_name: guided-sol-april
+output_root: runs
+scenarios:
+  loader: yaml_dir
+  path: scenarios
+  only: [gdpval_april_close_fabricated_ap_tb]
+models:
+  prefix: gpt-5.6-sol
+  under_test: [gpt-5.6-sol]
+  audit: gpt-4.1
+prefix:
+  k: 0                      # trajectories come from the guided script, not cr prepare
+  max_turns: 80
+  run_to_completion: true
+  cuts:
+    - {rule: deepest}
+summaries:
+  m: 100
+  compaction_variants: [codex]      # Sol is summarised with its native harness profile (Codex), never Claude Code
+  max_tokens: 16000
+audit:
+  max_retries: 3
+sandbox:
+  runner: docker
+  image: compaction-reader-sandbox:latest
+  cpus: 1
+  memory: 512m
+  timeout_s: 120
+  keep_sandboxes: false
+llm:
+  api: responses
+  concurrency: 8
+  max_retries: 5
+  timeout_s: 600

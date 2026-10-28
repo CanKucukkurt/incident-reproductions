@@ -1,0 +1,16 @@
+name: kimi_cli
+source: 'MoonshotAI/kimi-cli main (src/kimi_cli/soul/compaction.py SimpleCompaction + prompts/compact.md; history rendered as "## Message N / Role / Content" text into one user message followed by compact.md, system prompt COMPACTION_SYSTEM_PROMPT, no tools, last 2 user/assistant messages preserved verbatim; output re-injected as a user message prefixed with COMPACTION_OUTPUT_PREFIX)'
+compaction:
+  mode: rendered_user
+  tools: none
+  system_file: system.md
+  render: kimi
+  preserve_tail: 2             # last 2 user/assistant-role messages (and what follows them) are not compacted
+  prompt_file: compaction.md   # appended after the rendered history ("\n" + prompt)
+  postprocess: none
+handoff:
+  role: user
+  preamble_file: handoff_preamble.md
+  keep_user_messages: false
+  preserve_tail: true          # the preserved messages follow the summary message verbatim
+  resume: none

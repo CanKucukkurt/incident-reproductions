@@ -1,0 +1,31 @@
+# Sol's own full trajectory on the base scenario (source for scripts/guided_fabrication.py, and a
+# no-nudge baseline). Responses API; env CR_API_KEY=<openai key>, no CR_BASE_URL.
+run_name: sol-base
+output_root: runs
+scenarios:
+  loader: yaml_dir
+  path: scenarios
+  only: [gdpval_prepaid_missing_march]
+models:
+  prefix: gpt-5.6-sol
+  under_test: [gpt-5.6-sol]
+  audit: gpt-4.1
+prefix:
+  k: 1
+  max_turns: 40
+  run_to_completion: true
+  cuts:
+    - {rule: deepest}
+summaries:
+  m: 1
+  compaction_variants: [codex]      # Sol is summarised with its native harness profile (Codex), never Claude Code
+  max_tokens: 16000
+sandbox:
+  runner: docker
+  image: compaction-reader-sandbox:latest
+  timeout_s: 60
+llm:
+  api: responses
+  concurrency: 4
+  max_retries: 5
+  timeout_s: 600

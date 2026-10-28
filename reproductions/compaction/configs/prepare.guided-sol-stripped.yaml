@@ -1,0 +1,38 @@
+# Stripped all-Sol fabrication (scripts/edit_trajectory.py on runs/guided-sol-all p00-fab): labelling removed, PDF looks like a vendor invoice. Guided fabrication trajectories (scripts/guided_fabrication.py) with gpt-5.6-sol acting and
+# summarising, via the OpenAI Responses API (chat completions refuses tools for Sol with reasoning on).
+# Env: CR_API_KEY=<openai key>, no CR_BASE_URL.
+run_name: guided-sol-stripped
+output_root: runs
+scenarios:
+  loader: yaml_dir
+  path: scenarios
+  only: [gdpval_prepaid_fabricated_march]
+models:
+  prefix: gpt-5.6-sol
+  under_test: [gpt-5.6-sol]
+  audit: gpt-4.1
+prefix:
+  k: 0                      # trajectories come from the guided script, not cr prepare
+  max_turns: 40
+  run_to_completion: true
+  cuts:
+    - {rule: deepest}
+summaries:
+  m: 100
+  sample_start: 11         # s00 smoke, s01-s10 first batch, s11-s110 the 100-sample batch
+  compaction_variants: [codex]      # Sol is summarised with its native harness profile (Codex), never Claude Code
+  max_tokens: 16000
+audit:
+  max_retries: 3
+sandbox:
+  runner: docker
+  image: compaction-reader-sandbox:latest
+  cpus: 1
+  memory: 512m
+  timeout_s: 60
+  keep_sandboxes: false
+llm:
+  api: responses
+  concurrency: 8
+  max_retries: 5
+  timeout_s: 600

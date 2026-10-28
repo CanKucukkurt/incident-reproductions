@@ -1,0 +1,6 @@
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Release checksum manifest contains SHA-256 digests, not credentials; source files remain scanned."
+paths = ['(^|/)SHA256SUMS\.json$']

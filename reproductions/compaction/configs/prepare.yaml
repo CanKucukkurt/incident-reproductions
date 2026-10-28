@@ -1,0 +1,28 @@
+run_name: demo
+output_root: runs
+scenarios:
+  loader: yaml_dir
+  path: scenarios
+models:
+  prefix: gpt-4.1          # model that generates the prefix (may differ from models under test)
+  under_test: [gpt-4.1]    # each writes its own summaries and later acts as successor
+  audit: gpt-4.1
+prefix:
+  k: 5
+  max_turns: 40
+summaries:
+  m: 3
+  compaction_variants: [self_handoff]   # add neutral_summarize / will_be_reviewed to enable that sweep in Stage B
+  max_tokens: 2000
+audit:
+  max_retries: 3
+sandbox:
+  runner: docker           # `fake` is only accepted together with --mock
+  image: compaction-reader-sandbox:latest
+  cpus: 1
+  memory: 512m
+  timeout_s: 60
+  keep_sandboxes: false
+llm:
+  concurrency: 4
+  max_retries: 5

@@ -1,0 +1,116 @@
+# Reader side on the April stripped cut: the 70 'laundering' summaries (judge continues_fiction=true) as written (instruction none),
+# Sol successor via the Responses API restores the deep-cut snapshot (workbook + fabricated AP_TB-1.xlsx present), finishes, then gets the
+# real_sources follow-up. Env: CR_API_KEY=<openai key>, no CR_BASE_URL.
+run_name: april-stripped-reader
+prepare_run: guided-sol-april-stripped
+output_root: runs
+scenarios:
+  loader: yaml_dir
+  path: scenarios
+  only:
+  - gdpval_april_close_fabricated_ap_tb
+base:
+  instruction: none
+  claimed_author: self
+  summary_role: user
+  compaction_variant: codex
+  mode: agent
+  insert_position: inline
+  edit_mode: insert
+grid:
+  instruction:
+  - none
+sweeps: {}
+samples_per_cell: 1
+only_summaries:
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s01
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s02
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s05
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s06
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s08
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s09
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s10
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s11
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s12
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s13
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s14
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s16
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s18
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s19
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s20
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s22
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s23
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s25
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s27
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s28
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s31
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s32
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s33
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s34
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s36
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s37
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s38
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s40
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s41
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s42
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s45
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s46
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s47
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s49
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s50
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s53
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s54
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s55
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s56
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s58
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s59
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s60
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s61
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s62
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s63
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s64
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s65
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s66
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s68
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s69
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s70
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s71
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s72
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s75
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s76
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s77
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s78
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s80
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s81
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s82
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s84
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s85
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s86
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s87
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s88
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s92
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s93
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s95
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s96
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s99
+followup:
+  enabled: true
+  prompt: real_sources
+  tools: true
+  only_for:
+    instruction:
+    - none
+successor:
+  max_turns: 30
+  max_tokens: 40000
+  max_degenerate_retries: 2
+sandbox:
+  runner: docker
+  image: compaction-reader-sandbox:latest
+  timeout_s: 120
+llm:
+  api: responses
+  concurrency: 16
+  max_retries: 5
+  timeout_s: 600
+max_parallel_rollouts: 16

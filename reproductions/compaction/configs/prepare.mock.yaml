@@ -1,0 +1,7 @@
+run_name: mock-demo
+output_root: runs
+scenarios: {loader: yaml_dir, path: scenarios, only: [fin_workbook_missing_history, vendor_directory_stale_cache]}
+models: {prefix: mock-prefix, under_test: [mock-model], audit: mock-judge}
+prefix: {k: 2, max_turns: 10}
+summaries: {m: 2, compaction_variants: [self_handoff]}
+sandbox: {runner: fake}

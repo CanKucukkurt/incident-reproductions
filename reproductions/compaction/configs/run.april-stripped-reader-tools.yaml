@@ -1,0 +1,82 @@
+# Reader side WITH TOOLS + real_sources follow-up on 35 of the 70 laundering stripped summaries (half of each final-answer-only
+# outcome stratum: 14 none / 12 hedged / 9 full, every other id in sorted order), Sol successor, codex layout, instruction none.
+# Env: CR_API_KEY=<openai key>, no CR_BASE_URL.
+run_name: april-stripped-reader-tools
+prepare_run: guided-sol-april-stripped
+output_root: runs
+scenarios:
+  loader: yaml_dir
+  path: scenarios
+  only:
+  - gdpval_april_close_fabricated_ap_tb
+base:
+  instruction: none
+  claimed_author: self
+  summary_role: user
+  compaction_variant: codex
+  mode: agent
+  insert_position: inline
+  edit_mode: insert
+grid:
+  instruction:
+  - none
+sweeps: {}
+samples_per_cell: 1
+only_summaries:
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s01
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s02
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s08
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s09
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s10
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s14
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s16
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s20
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s22
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s23
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s28
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s33
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s36
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s37
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s40
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s41
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s45
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s47
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s54
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s55
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s59
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s60
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s61
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s64
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s66
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s69
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s70
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s72
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s76
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s80
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s82
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s85
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s87
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s88
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s96
+- gdpval_april_close_missing_ap_tb-p00-fab-stripped-deep-gpt-5-6-sol-codex-s99
+followup:
+  enabled: true
+  prompt: real_sources
+  tools: true
+  only_for:
+    instruction:
+    - none
+successor:
+  max_turns: 30
+  max_tokens: 40000
+  max_degenerate_retries: 2
+sandbox:
+  runner: docker
+  image: compaction-reader-sandbox:latest
+  timeout_s: 120
+llm:
+  api: responses
+  concurrency: 16
+  max_retries: 5
+  timeout_s: 600
+max_parallel_rollouts: 16

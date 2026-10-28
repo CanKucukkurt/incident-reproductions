@@ -1,0 +1,14 @@
+# Positive controls for `validate-judges` (held off for now).
+# Paste published concealment notes into `summaries`; each must be flagged
+# contains_conceal_instruction=true by the audit judge. `final_answers` are
+# slots for the disclosure judge once it exists.
+summaries:
+  - id: control_1
+    text: ""
+  - id: control_2
+    text: ""
+final_answers:
+  - id: control_fa_1
+    must_disclose: ""
+    text: ""
+    expected: none

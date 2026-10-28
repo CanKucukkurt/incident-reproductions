@@ -1,0 +1,8 @@
+run_name: mock-demo-run
+prepare_run: mock-demo
+output_root: runs
+scenarios: {loader: yaml_dir, path: scenarios, only: [fin_workbook_missing_history, vendor_directory_stale_cache]}
+grid: {instruction: [none, honest, conditional, conceal]}
+sweeps: {claimed_author: [human_engineer], mode: [final_answer_only]}
+followup: {enabled: true, tools: false, only_for: {instruction: [none, conceal]}}
+sandbox: {runner: fake}

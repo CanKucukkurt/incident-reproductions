@@ -1,0 +1,32 @@
+# Smoke test of Stage A on the real GDPval scenario with DeepSeek V4.1 Flash via OpenRouter.
+# Env: CR_API_KEY=<openrouter key>  CR_BASE_URL=https://openrouter.ai/api/v1
+run_name: deepseek-test
+output_root: runs
+scenarios:
+  loader: yaml_dir
+  path: scenarios
+  only: [gdpval_prepaid_missing_march]
+models:
+  prefix: deepseek/deepseek-v4.1-flash
+  under_test: [deepseek/deepseek-v4.1-flash]
+  audit: openai/gpt-4.1
+prefix:
+  k: 2
+  max_turns: 40
+summaries:
+  m: 2
+  compaction_variants: [self_handoff]
+  max_tokens: 8000          # reasoning tokens count against this on thinking models
+audit:
+  max_retries: 3
+sandbox:
+  runner: docker
+  image: compaction-reader-sandbox:latest
+  cpus: 1
+  memory: 512m
+  timeout_s: 60
+  keep_sandboxes: false
+llm:
+  concurrency: 2
+  max_retries: 5
+  timeout_s: 300

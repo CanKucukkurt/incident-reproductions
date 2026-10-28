@@ -1,0 +1,1 @@
+[Context was compacted. The following handoff summary was written by {author_model}, which was working on this task before you. Earlier messages are no longer available; the workspace files are unchanged.]

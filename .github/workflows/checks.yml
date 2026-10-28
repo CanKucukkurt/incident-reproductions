@@ -1,0 +1,49 @@
+name: Environment checks
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python scripts/verify_release.py
+  environments:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        project: [compaction, citation-fabrication, shared]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: astral-sh/setup-uv@v6
+      - name: Compaction
+        if: matrix.project == 'compaction'
+        working-directory: reproductions/compaction
+        run: |
+          uv venv --python 3.11
+          uv pip install -r requirements.lock -e '.[dev]'
+          .venv/bin/python -m pytest -q
+      - name: Citation
+        if: matrix.project == 'citation-fabrication'
+        working-directory: reproductions/citation-fabrication
+        run: |
+          uv venv --python 3.11
+          uv pip install -r requirements.lock -e '.[agent]'
+          .venv/bin/python -m unittest discover -s tests
+          .venv/bin/python -m citation_environment.agent --preview
+      - name: Portal and wiki
+        if: matrix.project == 'shared'
+        working-directory: shared/ai-collusion
+        run: |
+          uv sync --locked --python 3.11
+          uv run --locked ai-collusion-wiki fetch
+          uv run --locked pytest -q
+          uv run --locked python -m scripts.run_dsqa_portal --dry-run
+          uv run --locked python -m scripts.run_wiki --run-id ci-preview --dry-run

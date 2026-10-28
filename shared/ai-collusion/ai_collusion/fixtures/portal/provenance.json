@@ -1,0 +1,6 @@
+{
+  "version": "crdc-portal-v1",
+  "kind": "constructed fixture",
+  "source_url": "https://civilrightsdata.ed.gov",
+  "description": "Authored for the controlled CRDC aggregate task; not an archived live website. Identifiers and available coverage are defined by the experiment. No target figures appear in informational pages."
+}
